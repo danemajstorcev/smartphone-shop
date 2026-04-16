@@ -53,12 +53,8 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <div className="container">
+       
           <span>© {new Date().getFullYear()} NexPhone. All rights reserved.</span>
-          <div className={styles.legal}>
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Cookies</a>
-          </div>
         </div>
       </div>
     </footer>
