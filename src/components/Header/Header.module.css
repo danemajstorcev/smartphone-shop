@@ -261,4 +261,9 @@
 @media (max-width: 640px) {
   .searchWrap { display: none; }
   .menuBtn { display: flex; }
+  .inner { gap: 8px; }
+}
+@media (max-width: 360px) {
+  .logo span { display: none; }   /* show only icon on very tiny screens */
+  .logoIcon { margin-right: 0; }
 }

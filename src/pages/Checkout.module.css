@@ -203,10 +203,20 @@
   .summary { position: static; }
 }
 @media (max-width: 640px) {
+  .page { padding-top: calc(var(--header-h) + 20px); }
   .formGrid { grid-template-columns: 1fr; }
   .colFull { grid-column: auto; }
   .payMethods { grid-template-columns: 1fr; }
-  .progress { gap: 6px; }
+  .progress { gap: 4px; flex-wrap: nowrap; }
   .progressLabel { display: none; }
-  .progressLine { min-width: 20px; }
+  .progressLine { min-width: 16px; }
+  .progressDot { width: 28px; height: 28px; font-size: 0.75rem; }
+  .card { padding: 20px 16px; }
+  .navBtns { flex-direction: column-reverse; }
+  .navBtns .btn-ghost, .placeBtn { width: 100%; max-width: 100%; justify-content: center; }
+  .payMethodBtn { padding: 12px; font-size: 0.85rem; }
+}
+@media (max-width: 400px) {
+  .pageTitle { font-size: 1.5rem; }
+  .summaryItem { align-items: flex-start; }
 }

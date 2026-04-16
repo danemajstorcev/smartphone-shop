@@ -264,9 +264,24 @@
   .specGrid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  .name { font-size: 1.5rem; }
-  .price { font-size: 1.8rem; }
-  .thumbs { gap: 8px; }
+  .page { padding-top: calc(var(--header-h) + 20px); }
+  .name { font-size: 1.4rem; }
+  .price { font-size: 1.7rem; }
+  .thumbs { gap: 6px; }
+  .actions { flex-wrap: wrap; }
+  .addBtn { min-width: 100%; order: 1; }
+  .favBtn { order: 2; }
+  .compareBtn { order: 3; flex: 1; }
+  .deliveryBadges { flex-wrap: wrap; gap: 6px; }
+  .deliveryBadge { font-size: 0.74rem; padding: 4px 9px; }
+  .reviewSummary { flex-direction: column; gap: 20px; }
+  .breadcrumb { font-size: 0.78rem; gap: 5px; margin-bottom: 20px; }
+}
+@media (max-width: 400px) {
+  .name { font-size: 1.25rem; }
+  .price { font-size: 1.5rem; }
+  .mainImg { aspect-ratio: 3/2; }
+  .tabBtn { padding: 10px 14px; font-size: 0.85rem; }
 }
 
 /* Compare button on detail page */

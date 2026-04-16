@@ -548,13 +548,31 @@
 
 /* Responsive */
 @media (max-width: 900px) {
-  .labelCol { width: 120px; }
-  .specLabel { font-size: 0.78rem; padding: 10px 12px; }
-  .specValue { font-size: 0.83rem; padding: 10px 12px; }
+  .labelCol { width: 110px; }
+  .specLabel { font-size: 0.76rem; padding: 10px 10px; }
+  .specValue { font-size: 0.82rem; padding: 10px 10px; }
+  .phoneHeader { padding: 16px 10px; min-height: 240px; }
+  .phoneHeaderImg { width: 90px; height: 110px; }
+  .headerCartBtn { padding: 7px 10px; font-size: 0.78rem; }
+  .headerPrice { font-size: 1rem; }
+  .quickAddBar { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 @media (max-width: 640px) {
   .pageTitle { font-size: 1.7rem; }
   .emptySlots { grid-template-columns: 1fr; }
   .popularGrid { grid-template-columns: 1fr 1fr; }
-  .catFilters { gap: 6px; }
+  .catFilters { gap: 5px; }
+  .catAll, .catPill { padding: 5px 10px; font-size: 0.78rem; }
+  .labelCol { width: 90px; }
+  .specLabel { font-size: 0.72rem; padding: 9px 8px; }
+  .specValue { font-size: 0.78rem; padding: 9px 8px; }
+  .headerActions { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+@media (max-width: 480px) {
+  .popularGrid { grid-template-columns: 1fr; }
+  .pageTitle { font-size: 1.4rem; }
+  .pageSub { font-size: 0.82rem; }
+  .phoneHeaderImg { width: 70px; height: 88px; }
+  .phoneHeaderName { font-size: 0.82rem; }
+  .headerCartBtn span { display: none; }   /* icon only on very small */
 }

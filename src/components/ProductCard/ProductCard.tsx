@@ -175,7 +175,7 @@ export default function ProductCard({ product, onAddToCart, animDelay = 0 }: Pro
             <rect x="2" y="3" width="8" height="18" rx="1"/>
             <rect x="14" y="3" width="8" height="18" rx="1"/>
           </svg>
-          {inCompare ? 'In Compare' : 'Compare'}
+          <span>{inCompare ? 'In Compare' : 'Compare'}</span>
         </button>
         </div>
       </div>

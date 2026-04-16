@@ -142,9 +142,13 @@
   .filterOpen { display: block; }
   .mobileFilterToggle { display: flex; }
   .searchWrap { width: 100%; flex: 1; min-width: 0; }
-  .pageHeader { align-items: flex-start; }
+  .pageHeader { align-items: flex-start; flex-direction: column; gap: 16px; }
 }
 @media (max-width: 600px) {
   .page { padding-top: calc(var(--header-h) + 24px); }
   .pageTitle { font-size: 1.7rem; }
+  .pageSubtitle { font-size: 0.85rem; }
+}
+@media (max-width: 400px) {
+  .pageTitle { font-size: 1.4rem; }
 }

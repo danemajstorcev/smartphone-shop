@@ -232,12 +232,24 @@
 
 /* Responsive */
 @media (max-width: 900px) {
-  .carousel { height: 480px; }
+  .carousel { height: 460px; }
   .content { grid-template-columns: 1fr; gap: 0; }
   .imageWrap { display: none; }
-  .headline { font-size: clamp(2.4rem, 8vw, 3.4rem); }
+  .headline { font-size: clamp(2.2rem, 7vw, 3.2rem); }
+  .sub { font-size: 0.95rem; }
 }
 @media (max-width: 600px) {
-  .carousel { height: 420px; }
-  .price { font-size: 1.8rem; }
+  .carousel { height: 400px; }
+  .price { font-size: 1.7rem; }
+  .ctas { gap: 10px; }
+  .ctaPrimary { padding: 11px 20px; font-size: 0.88rem; }
+}
+@media (max-width: 400px) {
+  .carousel { height: 380px; }
+  .headline { font-size: 2rem; }
+  .price { font-size: 1.5rem; }
+  .sub { font-size: 0.88rem; }
+  .ctas { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .arrowLeft { left: 10px; }
+  .arrowRight { right: 10px; }
 }
