@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import styles from './Footer.module.css';
+import { Link } from "react-router-dom";
+import styles from "./Footer.module.css";
 
 export default function Footer() {
   return (
@@ -8,17 +8,39 @@ export default function Footer() {
         <div className={styles.brand}>
           <div className={styles.logo}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <rect x="5" y="2" width="14" height="20" rx="3" stroke="var(--accent)" strokeWidth="1.8"/>
-              <circle cx="12" cy="17.5" r="1.2" fill="var(--accent)"/>
+              <rect
+                x="5"
+                y="2"
+                width="14"
+                height="20"
+                rx="3"
+                stroke="var(--accent)"
+                strokeWidth="1.8"
+              />
+              <circle cx="12" cy="17.5" r="1.2" fill="var(--accent)" />
             </svg>
-            <span>Nex<strong>Phone</strong></span>
+            <span>
+              Nex<strong>Phone</strong>
+            </span>
           </div>
-          <p className={styles.tagline}>Premium smartphones, delivered worldwide.</p>
+          <p className={styles.tagline}>
+            Premium smartphones, delivered worldwide.
+          </p>
           <div className={styles.socials}>
-            {['Twitter', 'Instagram', 'YouTube'].map(s => (
+            {["Twitter", "Instagram", "YouTube"].map((s) => (
               <a key={s} href="#" className={styles.social} aria-label={s}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <rect width="24" height="24" rx="12" fill="rgba(255,255,255,0.06)"/>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <rect
+                    width="24"
+                    height="24"
+                    rx="12"
+                    fill="rgba(255,255,255,0.06)"
+                  />
                 </svg>
               </a>
             ))}
@@ -53,8 +75,9 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <div className="container">
-       
-          <span>© {new Date().getFullYear()} NexPhone. All rights reserved.</span>
+          <span>
+            © {new Date().getFullYear()} NexPhone. All rights reserved.
+          </span>
         </div>
       </div>
     </footer>

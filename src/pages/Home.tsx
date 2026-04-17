@@ -23,7 +23,7 @@ export default function Home({ onCartAdd }: Props) {
   const topRated = [...products].sort((a, b) => b.rating - a.rating).slice(0, 4);
 
   return (
-    <main>
+    <main style={{ paddingTop: 'var(--header-h)' }}>
       {/* Carousel hero */}
       <Carousel />
 
