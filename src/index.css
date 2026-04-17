@@ -1,4 +1,3 @@
-/* ─── Design Tokens ─────────────────────────────────────────── */
 :root {
   --bg: #06060f;
   --surface: #0d0d1a;
@@ -19,8 +18,8 @@
   --text-muted: #5a5a8a;
   --text-soft: #9898c0;
 
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: "Syne", sans-serif;
+  --font-body: "DM Sans", sans-serif;
 
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -34,8 +33,9 @@
   --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ─── Reset ──────────────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -69,7 +69,9 @@ button {
   color: inherit;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   font-family: var(--font-body);
 }
 
@@ -78,17 +80,26 @@ img {
   display: block;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
-/* ─── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--surface); }
-::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
 
-/* ─── Utility ────────────────────────────────────────────────── */
 .container {
   max-width: 1320px;
   margin: 0 auto;
@@ -115,7 +126,9 @@ ul, ol {
   transform: translateY(-1px);
   box-shadow: 0 6px 20px var(--accent-glow);
 }
-.btn-primary:active { transform: translateY(0); }
+.btn-primary:active {
+  transform: translateY(0);
+}
 
 .btn-ghost {
   display: inline-flex;
@@ -163,43 +176,62 @@ ul, ol {
   border: 1px solid rgba(0, 216, 255, 0.2);
 }
 
-/* ─── Page wrapper ───────────────────────────────────────────── */
 .page-wrapper {
   padding-top: var(--header-h);
   min-height: 100dvh;
 }
 
-/* ─── Animations ─────────────────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes shimmer {
-  0%   { background-position: -400px 0; }
-  100% { background-position: 400px 0; }
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
 }
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
-.anim-fadeUp { animation: fadeUp 0.5s ease both; }
+.anim-fadeUp {
+  animation: fadeUp 0.5s ease both;
+}
 
-/* ─── Grid ───────────────────────────────────────────────────── */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 22px;
 }
 
-/* ─── Empty state ─────────────────────────────────────────────── */
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -209,11 +241,18 @@ ul, ol {
   padding: 80px 24px;
   text-align: center;
 }
-.empty-state svg { opacity: 0.25; }
-.empty-state h3 { font-family: var(--font-display); font-size: 1.4rem; }
-.empty-state p { color: var(--text-muted); font-size: 0.95rem; }
+.empty-state svg {
+  opacity: 0.25;
+}
+.empty-state h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+}
+.empty-state p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
 
-/* ─── Section headings ────────────────────────────────────────── */
 .section-header {
   display: flex;
   align-items: baseline;
@@ -239,9 +278,10 @@ ul, ol {
   gap: 4px;
   transition: gap var(--transition);
 }
-.section-link:hover { gap: 8px; }
+.section-link:hover {
+  gap: 8px;
+}
 
-/* ─── Toast ──────────────────────────────────────────────────── */
 .toast-container {
   position: fixed;
   bottom: 28px;
@@ -267,13 +307,20 @@ ul, ol {
   pointer-events: auto;
   min-width: 240px;
 }
-.toast-success { border-left: 3px solid var(--success); }
-.toast-error { border-left: 3px solid var(--danger); }
-.toast-icon { font-size: 1.1rem; }
+.toast-success {
+  border-left: 3px solid var(--success);
+}
+.toast-error {
+  border-left: 3px solid var(--danger);
+}
+.toast-icon {
+  font-size: 1.1rem;
+}
 
-/* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .container { padding: 0 16px; }
+  .container {
+    padding: 0 16px;
+  }
   .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     gap: 14px;

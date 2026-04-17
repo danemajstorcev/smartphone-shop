@@ -45,7 +45,6 @@
   width: 100%;
 }
 
-/* Text side */
 .text {
   display: flex;
   flex-direction: column;
