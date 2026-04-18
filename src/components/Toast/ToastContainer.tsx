@@ -1,4 +1,4 @@
-import { Toast } from '../../hooks/useToast';
+import { Toast } from "../../hooks/useToast";
 
 interface Props {
   toasts: Toast[];
@@ -9,15 +9,15 @@ export default function ToastContainer({ toasts, onRemove }: Props) {
   if (toasts.length === 0) return null;
   return (
     <div className="toast-container">
-      {toasts.map(t => (
+      {toasts.map((t) => (
         <div
           key={t.id}
           className={`toast toast-${t.type}`}
           onClick={() => onRemove(t.id)}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
         >
           <span className="toast-icon">
-            {t.type === 'success' ? '✓' : t.type === 'error' ? '✕' : 'ℹ'}
+            {t.type === "success" ? "✓" : t.type === "error" ? "✕" : "ℹ"}
           </span>
           {t.message}
         </div>

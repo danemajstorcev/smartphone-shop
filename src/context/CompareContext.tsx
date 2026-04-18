@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-import { Product } from '../types';
+import React, { createContext, useContext, useState, useCallback } from "react";
+import { Product } from "../types";
 
 const MAX_COMPARE = 4;
 
@@ -18,33 +18,35 @@ export function CompareProvider({ children }: { children: React.ReactNode }) {
   const [compareList, setCompareList] = useState<Product[]>([]);
 
   const addToCompare = useCallback((product: Product) => {
-    setCompareList(prev => {
-      if (prev.find(p => p.id === product.id)) return prev;
+    setCompareList((prev) => {
+      if (prev.find((p) => p.id === product.id)) return prev;
       if (prev.length >= MAX_COMPARE) return prev;
       return [...prev, product];
     });
   }, []);
 
   const removeFromCompare = useCallback((productId: string) => {
-    setCompareList(prev => prev.filter(p => p.id !== productId));
+    setCompareList((prev) => prev.filter((p) => p.id !== productId));
   }, []);
 
   const isInCompare = useCallback(
-    (productId: string) => compareList.some(p => p.id === productId),
-    [compareList]
+    (productId: string) => compareList.some((p) => p.id === productId),
+    [compareList],
   );
 
   const clearCompare = useCallback(() => setCompareList([]), []);
 
   return (
-    <CompareContext.Provider value={{
-      compareList,
-      addToCompare,
-      removeFromCompare,
-      isInCompare,
-      clearCompare,
-      isFull: compareList.length >= MAX_COMPARE,
-    }}>
+    <CompareContext.Provider
+      value={{
+        compareList,
+        addToCompare,
+        removeFromCompare,
+        isInCompare,
+        clearCompare,
+        isFull: compareList.length >= MAX_COMPARE,
+      }}
+    >
       {children}
     </CompareContext.Provider>
   );
@@ -52,6 +54,6 @@ export function CompareProvider({ children }: { children: React.ReactNode }) {
 
 export function useCompare() {
   const ctx = useContext(CompareContext);
-  if (!ctx) throw new Error('useCompare must be used inside CompareProvider');
+  if (!ctx) throw new Error("useCompare must be used inside CompareProvider");
   return ctx;
 }

@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-import { Product } from '../types';
-import { products } from '../data/products';
+import React, { createContext, useContext, useState, useCallback } from "react";
+import { Product } from "../types";
+import { products } from "../data/products";
 
 interface FavoritesContextValue {
   favoriteIds: Set<string>;
@@ -15,7 +15,7 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
 
   const toggleFavorite = useCallback((productId: string) => {
-    setFavoriteIds(prev => {
+    setFavoriteIds((prev) => {
       const next = new Set(prev);
       if (next.has(productId)) next.delete(productId);
       else next.add(productId);
@@ -23,12 +23,17 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const isFavorite = useCallback((productId: string) => favoriteIds.has(productId), [favoriteIds]);
+  const isFavorite = useCallback(
+    (productId: string) => favoriteIds.has(productId),
+    [favoriteIds],
+  );
 
-  const favoriteProducts = products.filter(p => favoriteIds.has(p.id));
+  const favoriteProducts = products.filter((p) => favoriteIds.has(p.id));
 
   return (
-    <FavoritesContext.Provider value={{ favoriteIds, toggleFavorite, isFavorite, favoriteProducts }}>
+    <FavoritesContext.Provider
+      value={{ favoriteIds, toggleFavorite, isFavorite, favoriteProducts }}
+    >
       {children}
     </FavoritesContext.Provider>
   );
@@ -36,6 +41,7 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
 
 export function useFavorites() {
   const ctx = useContext(FavoritesContext);
-  if (!ctx) throw new Error('useFavorites must be used inside FavoritesProvider');
+  if (!ctx)
+    throw new Error("useFavorites must be used inside FavoritesProvider");
   return ctx;
 }

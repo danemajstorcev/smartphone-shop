@@ -1,14 +1,14 @@
-import { BRANDS, MIN_PRICE, MAX_PRICE } from '../../data/products';
-import { FilterState, Brand, PhoneType, SortOption } from '../../types';
-import styles from './FilterPanel.module.css';
+import { BRANDS, MIN_PRICE, MAX_PRICE } from "../../data/products";
+import { FilterState, Brand, PhoneType, SortOption } from "../../types";
+import styles from "./FilterPanel.module.css";
 
-const TYPES: PhoneType[] = ['flagship', 'mid-range', 'budget'];
+const TYPES: PhoneType[] = ["flagship", "mid-range", "budget"];
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: 'default', label: 'Featured' },
-  { value: 'price-asc', label: 'Price: Low to High' },
-  { value: 'price-desc', label: 'Price: High to Low' },
-  { value: 'rating', label: 'Highest Rated' },
-  { value: 'newest', label: 'Newest First' },
+  { value: "default", label: "Featured" },
+  { value: "price-asc", label: "Price: Low to High" },
+  { value: "price-desc", label: "Price: High to Low" },
+  { value: "rating", label: "Highest Rated" },
+  { value: "newest", label: "Newest First" },
 ];
 
 interface Props {
@@ -18,17 +18,22 @@ interface Props {
   totalResults: number;
 }
 
-export default function FilterPanel({ filters, onChange, onReset, totalResults }: Props) {
+export default function FilterPanel({
+  filters,
+  onChange,
+  onReset,
+  totalResults,
+}: Props) {
   function toggleBrand(b: Brand) {
     const next = filters.brands.includes(b)
-      ? filters.brands.filter(x => x !== b)
+      ? filters.brands.filter((x) => x !== b)
       : [...filters.brands, b];
     onChange({ ...filters, brands: next });
   }
 
   function toggleType(t: PhoneType) {
     const next = filters.types.includes(t)
-      ? filters.types.filter(x => x !== t)
+      ? filters.types.filter((x) => x !== t)
       : [...filters.types, t];
     onChange({ ...filters, types: next });
   }
@@ -51,7 +56,9 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
       </div>
 
       <div className={styles.results}>
-        <span>{totalResults} product{totalResults !== 1 ? 's' : ''}</span>
+        <span>
+          {totalResults} product{totalResults !== 1 ? "s" : ""}
+        </span>
       </div>
 
       {/* Sort */}
@@ -60,10 +67,14 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
         <select
           className={styles.select}
           value={filters.sortBy}
-          onChange={e => onChange({ ...filters, sortBy: e.target.value as SortOption })}
+          onChange={(e) =>
+            onChange({ ...filters, sortBy: e.target.value as SortOption })
+          }
         >
-          {SORT_OPTIONS.map(o => (
-            <option key={o.value} value={o.value}>{o.label}</option>
+          {SORT_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
           ))}
         </select>
       </section>
@@ -72,7 +83,7 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
       <section className={styles.section}>
         <h4 className={styles.sectionTitle}>Brand</h4>
         <div className={styles.checkList}>
-          {BRANDS.map(b => (
+          {BRANDS.map((b) => (
             <label key={b} className={styles.checkItem}>
               <input
                 type="checkbox"
@@ -90,7 +101,7 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
       <section className={styles.section}>
         <h4 className={styles.sectionTitle}>Category</h4>
         <div className={styles.checkList}>
-          {TYPES.map(t => (
+          {TYPES.map((t) => (
             <label key={t} className={styles.checkItem}>
               <input
                 type="checkbox"
@@ -98,7 +109,12 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
                 onChange={() => toggleType(t)}
                 className={styles.checkbox}
               />
-              <span className={styles.checkLabel} style={{ textTransform: 'capitalize' }}>{t}</span>
+              <span
+                className={styles.checkLabel}
+                style={{ textTransform: "capitalize" }}
+              >
+                {t}
+              </span>
             </label>
           ))}
         </div>
@@ -109,7 +125,10 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
         <h4 className={styles.sectionTitle}>
           Price Range
           <span className={styles.priceDisplay}>
-            ${filters.minPrice} – ${filters.maxPrice === MAX_PRICE ? `${MAX_PRICE}+` : filters.maxPrice}
+            ${filters.minPrice} – $
+            {filters.maxPrice === MAX_PRICE
+              ? `${MAX_PRICE}+`
+              : filters.maxPrice}
           </span>
         </h4>
         <div className={styles.rangeWrap}>
@@ -118,7 +137,7 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
             min={MIN_PRICE}
             max={MAX_PRICE}
             value={filters.minPrice}
-            onChange={e => {
+            onChange={(e) => {
               const v = Number(e.target.value);
               if (v < filters.maxPrice) onChange({ ...filters, minPrice: v });
             }}
@@ -129,7 +148,7 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
             min={MIN_PRICE}
             max={MAX_PRICE}
             value={filters.maxPrice}
-            onChange={e => {
+            onChange={(e) => {
               const v = Number(e.target.value);
               if (v > filters.minPrice) onChange({ ...filters, maxPrice: v });
             }}
@@ -142,7 +161,12 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
             value={filters.minPrice}
             min={MIN_PRICE}
             max={filters.maxPrice - 1}
-            onChange={e => onChange({ ...filters, minPrice: Math.max(MIN_PRICE, Number(e.target.value)) })}
+            onChange={(e) =>
+              onChange({
+                ...filters,
+                minPrice: Math.max(MIN_PRICE, Number(e.target.value)),
+              })
+            }
             className={styles.priceInput}
           />
           <span className={styles.priceSep}>–</span>
@@ -151,7 +175,12 @@ export default function FilterPanel({ filters, onChange, onReset, totalResults }
             value={filters.maxPrice}
             min={filters.minPrice + 1}
             max={MAX_PRICE}
-            onChange={e => onChange({ ...filters, maxPrice: Math.min(MAX_PRICE, Number(e.target.value)) })}
+            onChange={(e) =>
+              onChange({
+                ...filters,
+                maxPrice: Math.min(MAX_PRICE, Number(e.target.value)),
+              })
+            }
             className={styles.priceInput}
           />
         </div>

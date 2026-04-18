@@ -1,6 +1,19 @@
-export type Brand = 'Apple' | 'Samsung' | 'Google' | 'OnePlus' | 'Xiaomi' | 'Sony' | 'Motorola' | 'Nothing';
-export type PhoneType = 'flagship' | 'mid-range' | 'budget';
-export type SortOption = 'default' | 'price-asc' | 'price-desc' | 'rating' | 'newest';
+export type Brand =
+  | "Apple"
+  | "Samsung"
+  | "Google"
+  | "OnePlus"
+  | "Xiaomi"
+  | "Sony"
+  | "Motorola"
+  | "Nothing";
+export type PhoneType = "flagship" | "mid-range" | "budget";
+export type SortOption =
+  | "default"
+  | "price-asc"
+  | "price-desc"
+  | "rating"
+  | "newest";
 
 export interface ProductSpecs {
   display: string;
