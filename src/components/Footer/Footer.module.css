@@ -91,7 +91,7 @@
 .bottom .container {
   display: flex;
   align-items: center;
-  justify-content: center; /* centered by default */
+  justify-content: center;
 
   flex-direction: column;
   gap: 10px;
@@ -113,7 +113,6 @@
   color: var(--text);
 }
 
-/* ── Responsive ─────────────────────────────────── */
 @media (max-width: 900px) {
   .inner {
     grid-template-columns: 1fr;

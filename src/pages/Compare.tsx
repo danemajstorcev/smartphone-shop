@@ -10,7 +10,6 @@ interface Props {
   onCartAdd: () => void;
 }
 
-/* ─── Spec row definitions ──────────────────────────────────────── */
 type SpecRow = {
   label: string;
   key: keyof Product["specs"];
@@ -39,7 +38,6 @@ const SPEC_ROWS: SpecRow[] = [
   { label: "OS", key: "os", category: "Software" },
 ];
 
-/* ─── Extra product-level fields to compare ───────────────────── */
 type ExtraRow = {
   label: string;
   category: string;
@@ -130,7 +128,6 @@ const ALL_CATEGORIES = [
   "Software",
 ];
 
-/* ─── Parse numeric value from RAM/Battery for winner detection ── */
 function parseNumeric(val: string): number {
   const m = val.match(/(\d+(\.\d+)?)/);
   return m ? parseFloat(m[1]) : 0;
@@ -168,7 +165,6 @@ function winnerForExtra(
   );
 }
 
-/* ─── Slot empty state ───────────────────────────────────────────── */
 function EmptySlot({ onSelect }: { onSelect: (p: Product) => void }) {
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
@@ -244,7 +240,6 @@ function EmptySlot({ onSelect }: { onSelect: (p: Product) => void }) {
   );
 }
 
-/* ─── Phone header card ──────────────────────────────────────────── */
 function PhoneHeader({
   product,
   onRemove,
@@ -326,7 +321,6 @@ function PhoneHeader({
   );
 }
 
-/* ─── Main Compare page ──────────────────────────────────────────── */
 export default function Compare({ onCartAdd }: Props) {
   const { compareList, addToCompare, removeFromCompare, clearCompare } =
     useCompare();
@@ -341,7 +335,6 @@ export default function Compare({ onCartAdd }: Props) {
   ].slice(0, 4);
   const filledProducts = compareList;
 
-  /* Best value: highest rating / price ratio */
   const bestValueId = useMemo(() => {
     if (filledProducts.length < 2) return null;
     const scored = filledProducts.map((p) => ({
@@ -359,7 +352,6 @@ export default function Compare({ onCartAdd }: Props) {
     });
   }
 
-  /* Check if a spec row has all same values (to filter for diff mode) */
   function allSame(values: string[]): boolean {
     return values.length > 1 && values.every((v) => v === values[0]);
   }
@@ -369,7 +361,6 @@ export default function Compare({ onCartAdd }: Props) {
   return (
     <div className={`page-wrapper ${styles.page}`}>
       <div className="container">
-        {/* Page header */}
         <div className={styles.pageHeader}>
           <div>
             <h1 className={styles.pageTitle}>
@@ -408,7 +399,6 @@ export default function Compare({ onCartAdd }: Props) {
           )}
         </div>
 
-        {/* Quick-add bar (if less than 4) */}
         {compareList.length < 4 && compareList.length > 0 && (
           <div className={styles.quickAddBar}>
             <span className={styles.quickAddLabel}>Quick add:</span>
@@ -429,7 +419,6 @@ export default function Compare({ onCartAdd }: Props) {
           </div>
         )}
 
-        {/* Category filter pills */}
         {compareList.length > 0 && (
           <div className={styles.catFilters}>
             <button
@@ -450,7 +439,6 @@ export default function Compare({ onCartAdd }: Props) {
           </div>
         )}
 
-        {/* Main comparison table */}
         <div className={styles.tableWrap}>
           <table
             className={styles.table}
@@ -463,7 +451,6 @@ export default function Compare({ onCartAdd }: Props) {
               ))}
             </colgroup>
 
-            {/* Phone headers */}
             <thead>
               <tr>
                 <th className={styles.cornerCell}>
@@ -507,7 +494,6 @@ export default function Compare({ onCartAdd }: Props) {
               {ALL_CATEGORIES.map((category) => {
                 if (!activeCategories.has(category)) return null;
 
-                /* Gather rows for this category */
                 const extraInCat = EXTRA_ROWS.filter(
                   (r) => r.category === category,
                 );
@@ -526,7 +512,6 @@ export default function Compare({ onCartAdd }: Props) {
 
                 return (
                   <React.Fragment key={category}>
-                    {/* Category header row */}
                     <tr className={styles.catHeaderRow}>
                       <td
                         colSpan={slots.length + 1}
@@ -539,7 +524,6 @@ export default function Compare({ onCartAdd }: Props) {
                     </tr>
 
                     {allRows.map(({ type, row }) => {
-                      /* Determine winners / highlights */
                       let winnerIds = new Set<string>();
                       let loserIds = new Set<string>();
 
@@ -553,8 +537,8 @@ export default function Compare({ onCartAdd }: Props) {
                       } else {
                         const er = row as ExtraRow;
                         if (er.label === "Price") {
-                          loserIds = winnerForExtra(er, filledProducts, false); // higher price = "worse"
-                          winnerIds = winnerForExtra(er, filledProducts, true); // lower price = winner
+                          loserIds = winnerForExtra(er, filledProducts, false);
+                          winnerIds = winnerForExtra(er, filledProducts, true);
                         } else if (
                           er.label === "Rating" ||
                           er.label === "In Stock"
@@ -563,7 +547,6 @@ export default function Compare({ onCartAdd }: Props) {
                         }
                       }
 
-                      /* Check if all filled products have same value for diff mode */
                       const values =
                         type === "spec"
                           ? filledProducts.map(
@@ -618,7 +601,6 @@ export default function Compare({ onCartAdd }: Props) {
                 );
               })}
 
-              {/* Score summary row */}
               {filledProducts.length > 1 && (
                 <>
                   <tr className={styles.catHeaderRow}>
@@ -684,7 +666,6 @@ export default function Compare({ onCartAdd }: Props) {
           </table>
         </div>
 
-        {/* Empty state */}
         {compareList.length === 0 && (
           <div className={styles.emptyState}>
             <div className={styles.emptyIllustration}>
@@ -716,7 +697,6 @@ export default function Compare({ onCartAdd }: Props) {
           </div>
         )}
 
-        {/* Popular comparisons */}
         <section className={styles.popular}>
           <h2 className={styles.popularTitle}>Popular Comparisons</h2>
           <div className={styles.popularGrid}>

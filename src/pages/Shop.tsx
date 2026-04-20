@@ -37,7 +37,6 @@ export default function Shop({ onCartAdd }: Props) {
   const filtered = useMemo(() => {
     let list = [...products];
 
-    // Search
     const q = searchQuery.toLowerCase().trim();
     if (q) {
       list = list.filter(
@@ -48,22 +47,18 @@ export default function Shop({ onCartAdd }: Props) {
       );
     }
 
-    // Brand
     if (filters.brands.length > 0) {
       list = list.filter((p) => filters.brands.includes(p.brand));
     }
 
-    // Type
     if (filters.types.length > 0) {
       list = list.filter((p) => filters.types.includes(p.type));
     }
 
-    // Price
     list = list.filter(
       (p) => p.price >= filters.minPrice && p.price <= filters.maxPrice,
     );
 
-    // Sort
     switch (filters.sortBy) {
       case "price-asc":
         list.sort((a, b) => a.price - b.price);
@@ -99,7 +94,6 @@ export default function Shop({ onCartAdd }: Props) {
   return (
     <div className={`page-wrapper ${styles.page}`}>
       <div className="container">
-        {/* Page header */}
         <div className={styles.pageHeader}>
           <div>
             <h1 className={styles.pageTitle}>
@@ -110,7 +104,6 @@ export default function Shop({ onCartAdd }: Props) {
             </p>
           </div>
 
-          {/* Search bar */}
           <div className={styles.searchWrap}>
             <svg
               width="16"
@@ -141,7 +134,6 @@ export default function Shop({ onCartAdd }: Props) {
           </div>
         </div>
 
-        {/* Mobile filter toggle */}
         <button
           className={styles.mobileFilterToggle}
           onClick={() => setMobileFiltersOpen((o) => !o)}
@@ -166,7 +158,6 @@ export default function Shop({ onCartAdd }: Props) {
         </button>
 
         <div className={styles.layout}>
-          {/* Filter panel */}
           <div
             className={`${styles.filterWrap} ${mobileFiltersOpen ? styles.filterOpen : ""}`}
           >
@@ -178,9 +169,7 @@ export default function Shop({ onCartAdd }: Props) {
             />
           </div>
 
-          {/* Products */}
           <div className={styles.productsArea}>
-            {/* Active filters chips */}
             {activeCount > 0 && (
               <div className={styles.chips}>
                 {filters.brands.map((b) => (

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { useFavorites } from "../../context/FavoritesContext";
+import { useAuth } from "../../context/AuthContext";
 import { products } from "../../data/products";
 import { Product } from "../../types";
 import styles from "./Header.module.css";
@@ -13,11 +14,14 @@ interface HeaderProps {
 export default function Header({ onCartClick }: HeaderProps) {
   const { totalItems } = useCart();
   const { favoriteIds } = useFavorites();
+  const { user, isAuthenticated, logout } = useAuth();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Product[]>([]);
   const [focused, setFocused] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -41,7 +45,21 @@ export default function Header({ onCartClick }: HeaderProps) {
 
   useEffect(() => {
     setMenuOpen(false);
+    setUserMenuOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (
+        userMenuRef.current &&
+        !userMenuRef.current.contains(e.target as Node)
+      ) {
+        setUserMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   function handleSelect(p: Product) {
     setQuery("");
@@ -58,6 +76,12 @@ export default function Header({ onCartClick }: HeaderProps) {
     if (e.key === "Enter" && results.length > 0) handleSelect(results[0]);
   }
 
+  function handleLogout() {
+    logout();
+    setUserMenuOpen(false);
+    navigate("/");
+  }
+
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/shop", label: "Shop" },
@@ -65,10 +89,13 @@ export default function Header({ onCartClick }: HeaderProps) {
     { to: "/compare", label: "Compare" },
   ];
 
+  const initials = user
+    ? `${user.firstName[0]}${user.lastName[0]}`.toUpperCase()
+    : "";
+
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
-        {/* Logo */}
         <Link to="/" className={styles.logo}>
           <span className={styles.logoIcon}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -89,7 +116,6 @@ export default function Header({ onCartClick }: HeaderProps) {
           </span>
         </Link>
 
-        {/* Desktop Nav */}
         <nav className={styles.nav}>
           {navLinks.map((l) => (
             <Link
@@ -102,7 +128,6 @@ export default function Header({ onCartClick }: HeaderProps) {
           ))}
         </nav>
 
-        {/* Search */}
         <div className={styles.searchWrap}>
           <div
             className={`${styles.searchBox} ${focused ? styles.searchFocused : ""}`}
@@ -142,7 +167,6 @@ export default function Header({ onCartClick }: HeaderProps) {
               </button>
             )}
           </div>
-
           {focused && results.length > 0 && (
             <div className={styles.dropdown}>
               {results.map((p) => (
@@ -165,7 +189,6 @@ export default function Header({ onCartClick }: HeaderProps) {
           )}
         </div>
 
-        {/* Actions */}
         <div className={styles.actions}>
           <Link
             to="/favorites"
@@ -209,7 +232,112 @@ export default function Header({ onCartClick }: HeaderProps) {
             )}
           </button>
 
-          {/* Mobile menu toggle */}
+          {isAuthenticated && user ? (
+            <div className={styles.userWrap} ref={userMenuRef}>
+              <button
+                className={styles.userBtn}
+                onClick={() => setUserMenuOpen((o) => !o)}
+                aria-label="Account menu"
+                title={`${user.firstName} ${user.lastName}`}
+              >
+                <span
+                  className={styles.userInitials}
+                  style={{ background: user.avatar }}
+                >
+                  {initials}
+                </span>
+              </button>
+              {userMenuOpen && (
+                <div className={styles.userMenu}>
+                  <div className={styles.userMenuHeader}>
+                    <span
+                      className={styles.userMenuInitials}
+                      style={{ background: user.avatar }}
+                    >
+                      {initials}
+                    </span>
+                    <div>
+                      <span className={styles.userMenuName}>
+                        {user.firstName} {user.lastName}
+                      </span>
+                      <span className={styles.userMenuEmail}>{user.email}</span>
+                    </div>
+                  </div>
+                  <div className={styles.userMenuDivider} />
+                  <Link
+                    to="/favorites"
+                    className={styles.userMenuItem}
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                    My Favorites
+                  </Link>
+                  <Link
+                    to="/compare"
+                    className={styles.userMenuItem}
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="2" y="3" width="8" height="18" rx="1" />
+                      <rect x="14" y="3" width="8" height="18" rx="1" />
+                    </svg>
+                    Compare Phones
+                  </Link>
+                  <div className={styles.userMenuDivider} />
+                  <button
+                    className={`${styles.userMenuItem} ${styles.userMenuLogout}`}
+                    onClick={handleLogout}
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                      <polyline points="16 17 21 12 16 7" />
+                      <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    Sign Out
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/login" className={styles.signInBtn}>
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span>Sign In</span>
+            </Link>
+          )}
+
           <button
             className={styles.menuBtn}
             onClick={() => setMenuOpen((o) => !o)}
@@ -228,7 +356,6 @@ export default function Header({ onCartClick }: HeaderProps) {
         </div>
       </div>
 
-      {/* Mobile Nav */}
       {menuOpen && (
         <div className={styles.mobileMenu}>
           {navLinks.map((l) => (
@@ -236,6 +363,40 @@ export default function Header({ onCartClick }: HeaderProps) {
               {l.label}
             </Link>
           ))}
+          <div className={styles.mobileDivider} />
+          {isAuthenticated && user ? (
+            <>
+              <div className={styles.mobileUser}>
+                <span
+                  className={styles.mobileUserInitials}
+                  style={{ background: user.avatar }}
+                >
+                  {initials}
+                </span>
+                <span>
+                  {user.firstName} {user.lastName}
+                </span>
+              </div>
+              <button
+                className={`${styles.mobileLink} ${styles.mobileLinkLogout}`}
+                onClick={handleLogout}
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className={styles.mobileLink}>
+                Sign In
+              </Link>
+              <Link
+                to="/signup"
+                className={`${styles.mobileLink} ${styles.mobileLinkAccent}`}
+              >
+                Create Account
+              </Link>
+            </>
+          )}
         </div>
       )}
     </header>

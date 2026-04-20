@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { products } from "../../data/products";
@@ -40,12 +40,18 @@ const SLIDES = [
 ].filter((s) => s.product);
 
 const INTERVAL = 5200;
+const SWIPE_THRESHOLD = 50;
 
 export default function Carousel() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [animDir, setAnimDir] = useState<"next" | "prev">("next");
   const { addItem } = useCart();
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const isSwiping = useRef(false);
 
   const go = useCallback((idx: number, dir: "next" | "prev" = "next") => {
     setAnimDir(dir);
@@ -61,6 +67,44 @@ export default function Carousel() {
     return () => clearInterval(t);
   }, [current, paused, go]);
 
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    function onTouchMove(e: TouchEvent) {
+      if (touchStartX.current === null || touchStartY.current === null) return;
+      const dx = e.touches[0].clientX - touchStartX.current;
+      const dy = e.touches[0].clientY - touchStartY.current;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
+        isSwiping.current = true;
+        e.preventDefault();
+      }
+    }
+
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => el.removeEventListener("touchmove", onTouchMove);
+  }, []);
+
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isSwiping.current = false;
+    setPaused(true);
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    touchStartY.current = null;
+    setPaused(false);
+
+    if (!isSwiping.current) return;
+    if (dx < -SWIPE_THRESHOLD) go(current + 1, "next");
+    else if (dx > SWIPE_THRESHOLD) go(current - 1, "prev");
+    isSwiping.current = false;
+  }
+
   const slide = SLIDES[current];
   if (!slide) return null;
 
@@ -70,21 +114,19 @@ export default function Carousel() {
 
   return (
     <section
+      ref={sectionRef}
       className={styles.carousel}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
-      {/* Background */}
       <div
         className={`${styles.bg} ${animDir === "next" ? styles.slideNext : styles.slidePrev}`}
         key={current}
         style={{ background: slide.gradient }}
       />
-
-      {/* Grid overlay */}
       <div className={styles.gridOverlay} />
-
-      {/* Glow */}
       <div
         className={styles.glow}
         style={{
@@ -124,13 +166,7 @@ export default function Carousel() {
           <div className={styles.ctas}>
             <button
               className={styles.ctaPrimary}
-              style={{
-                background: slide.accent,
-                color:
-                  slide.accent === "#f5c842" || slide.accent === "#c77dff"
-                    ? "#000"
-                    : "#000",
-              }}
+              style={{ background: slide.accent, color: "#000" }}
               onClick={() => addItem(slide.product, slide.product.colors[0])}
             >
               Add to Cart
@@ -163,7 +199,6 @@ export default function Carousel() {
         </div>
       </div>
 
-      {/* Controls */}
       <button
         className={`${styles.arrow} ${styles.arrowLeft}`}
         onClick={() => go(current - 1, "prev")}
@@ -197,7 +232,6 @@ export default function Carousel() {
         </svg>
       </button>
 
-      {/* Dots */}
       <div className={styles.dots}>
         {SLIDES.map((_, i) => (
           <button
@@ -210,7 +244,6 @@ export default function Carousel() {
         ))}
       </div>
 
-      {/* Progress bar */}
       {!paused && (
         <div className={styles.progress} key={`prog-${current}`}>
           <div

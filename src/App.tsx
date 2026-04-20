@@ -3,10 +3,12 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import { CompareProvider } from "./context/CompareContext";
+import { AuthProvider } from "./context/AuthContext";
 import Header from "./components/Header/Header";
 import CartDrawer from "./components/CartDrawer/CartDrawer";
 import Footer from "./components/Footer/Footer";
 import ToastContainer from "./components/Toast/ToastContainer";
+import ChatBot from "./components/ChatBot/ChatBot";
 import { useToast } from "./hooks/useToast";
 
 import Home from "./pages/Home";
@@ -15,6 +17,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Favorites from "./pages/Favorites";
 import Checkout from "./pages/Checkout";
 import Compare from "./pages/Compare";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
 
 function AppInner() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -36,6 +40,7 @@ function AppInner() {
       <Header onCartClick={() => setCartOpen((o) => !o)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
       <ToastContainer toasts={toasts} onRemove={removeToast} />
+      <ChatBot />
 
       <Routes>
         <Route path="/" element={<Home onCartAdd={handleCartAdd} />} />
@@ -53,6 +58,8 @@ function AppInner() {
           element={<Compare onCartAdd={handleCartAdd} />}
         />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route
           path="*"
           element={
@@ -95,12 +102,14 @@ function AppInner() {
 
 export default function App() {
   return (
-    <CartProvider>
-      <FavoritesProvider>
-        <CompareProvider>
-          <AppInner />
-        </CompareProvider>
-      </FavoritesProvider>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <FavoritesProvider>
+          <CompareProvider>
+            <AppInner />
+          </CompareProvider>
+        </FavoritesProvider>
+      </CartProvider>
+    </AuthProvider>
   );
 }

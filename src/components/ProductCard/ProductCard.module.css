@@ -19,7 +19,6 @@
     0 0 0 1px rgba(0, 216, 255, 0.08);
 }
 
-/* ── Image ─────────────────────────────────────── */
 .imageLink {
   display: block;
   flex-shrink: 0;
@@ -134,7 +133,6 @@
   border-color: rgba(0, 216, 255, 0.2) !important;
 }
 
-/* ── Name ───────────────────────────────────────── */
 .name {
   font-family: var(--font-display);
   font-size: 0.95rem;
@@ -143,9 +141,9 @@
   letter-spacing: -0.01em;
   color: var(--text);
   transition: color var(--transition);
-  /* clamp to 2 lines max so layout stays consistent */
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -153,7 +151,6 @@
   color: var(--accent);
 }
 
-/* ── Rating ─────────────────────────────────────── */
 .ratingRow {
   display: flex;
   align-items: center;
@@ -181,7 +178,6 @@
   min-width: 0;
 }
 
-/* ── Price ──────────────────────────────────────── */
 .priceRow {
   display: flex;
   align-items: baseline;
@@ -203,7 +199,6 @@
   white-space: nowrap;
 }
 
-/* ── Color swatches ─────────────────────────────── */
 .colors {
   display: flex;
   gap: 5px;
@@ -223,7 +218,6 @@
   transform: scale(1.3);
 }
 
-/* ── Card actions row ───────────────────────────── */
 .cardActions {
   display: flex;
   gap: 6px;
@@ -231,7 +225,6 @@
   padding-top: 2px;
 }
 
-/* ── Add to Cart button ─────────────────────────── */
 .addBtn {
   flex: 1;
   min-width: 0;
@@ -285,7 +278,6 @@
   }
 }
 
-/* ── Compare button ─────────────────────────────── */
 .compareBtn {
   display: flex;
   align-items: center;
@@ -320,7 +312,6 @@
   color: #a78bfa !important;
 }
 
-/* ── Tablet (768px) ─────────────────────────────── */
 @media (max-width: 768px) {
   .imageWrap {
     height: 175px;
@@ -346,7 +337,6 @@
   }
 }
 
-/* ── Mobile (480px) ─────────────────────────────── */
 @media (max-width: 480px) {
   .imageWrap {
     height: 155px;
@@ -363,10 +353,10 @@
   }
   .reviewCount {
     display: none;
-  } /* hide review count on tiny cards */
+  }
   .oldPrice {
     display: none;
-  } /* hide strikethrough on tiny cards */
+  }
   .cardActions {
     gap: 5px;
   }
@@ -374,7 +364,6 @@
     padding: 9px 5px;
     font-size: 0.75rem;
   }
-  /* hide compare text, show only icon */
   .compareBtn span {
     display: none;
   }

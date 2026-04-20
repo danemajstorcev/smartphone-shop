@@ -4,6 +4,9 @@
   overflow: hidden;
   display: flex;
   align-items: center;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .bg {
@@ -135,7 +138,6 @@
   color: #fff;
 }
 
-/* Image side */
 .imageWrap {
   position: relative;
   height: 420px;
@@ -164,7 +166,6 @@
   z-index: 1;
 }
 
-/* Arrows */
 .arrow {
   position: absolute;
   top: 50%;
@@ -193,7 +194,6 @@
   right: 20px;
 }
 
-/* Dots */
 .dots {
   position: absolute;
   bottom: 24px;
@@ -219,7 +219,6 @@
   border-radius: 4px;
 }
 
-/* Progress */
 .progress {
   position: absolute;
   bottom: 0;
@@ -235,7 +234,6 @@
   animation: progress var(--duration, 5200ms) linear both;
 }
 
-/* Animations */
 @keyframes slideInRight {
   from {
     transform: translateX(5%);
@@ -265,7 +263,6 @@
   }
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .carousel {
     height: 460px;
@@ -282,6 +279,9 @@
   }
   .sub {
     font-size: 0.95rem;
+  }
+  .arrow {
+    display: none !important;
   }
 }
 @media (max-width: 600px) {
@@ -316,11 +316,5 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-  }
-  .arrowLeft {
-    left: 10px;
-  }
-  .arrowRight {
-    right: 10px;
   }
 }

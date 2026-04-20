@@ -61,7 +61,6 @@ export default function FilterPanel({
         </span>
       </div>
 
-      {/* Sort */}
       <section className={styles.section}>
         <h4 className={styles.sectionTitle}>Sort By</h4>
         <select
@@ -79,7 +78,6 @@ export default function FilterPanel({
         </select>
       </section>
 
-      {/* Brands */}
       <section className={styles.section}>
         <h4 className={styles.sectionTitle}>Brand</h4>
         <div className={styles.checkList}>
@@ -97,7 +95,6 @@ export default function FilterPanel({
         </div>
       </section>
 
-      {/* Type */}
       <section className={styles.section}>
         <h4 className={styles.sectionTitle}>Category</h4>
         <div className={styles.checkList}>
@@ -120,7 +117,6 @@ export default function FilterPanel({
         </div>
       </section>
 
-      {/* Price Range */}
       <section className={styles.section}>
         <h4 className={styles.sectionTitle}>
           Price Range

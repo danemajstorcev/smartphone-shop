@@ -26,10 +26,8 @@ export default function Home({ onCartAdd }: Props) {
 
   return (
     <main style={{ paddingTop: "var(--header-h)" }}>
-      {/* Carousel hero */}
       <Carousel />
 
-      {/* Brand strip */}
       <section className={styles.brandStrip}>
         <div className="container">
           <p className={styles.brandLabel}>Authorized reseller of</p>
@@ -51,7 +49,6 @@ export default function Home({ onCartAdd }: Props) {
         </div>
       </section>
 
-      {/* New arrivals */}
       <section className={styles.section}>
         <div className="container">
           <div className="section-header">
@@ -75,7 +72,6 @@ export default function Home({ onCartAdd }: Props) {
         </div>
       </section>
 
-      {/* Feature banners */}
       <section className={styles.banners}>
         <div className="container">
           <div className={styles.bannerGrid}>
@@ -151,7 +147,6 @@ export default function Home({ onCartAdd }: Props) {
         </div>
       </section>
 
-      {/* Top rated */}
       <section className={styles.section}>
         <div className="container">
           <div className="section-header">
@@ -175,7 +170,6 @@ export default function Home({ onCartAdd }: Props) {
         </div>
       </section>
 
-      {/* On Sale */}
       {saleProducts.length > 0 && (
         <section className={`${styles.section} ${styles.saleSection}`}>
           <div className="container">
@@ -201,7 +195,6 @@ export default function Home({ onCartAdd }: Props) {
         </section>
       )}
 
-      {/* Trust badges */}
       <section className={styles.trust}>
         <div className="container">
           <div className={styles.trustGrid}>

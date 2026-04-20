@@ -198,7 +198,6 @@
   box-shadow: 0 0 0 3px var(--accent-dim);
 }
 
-/* Availability */
 .inStock {
   display: inline-flex;
   align-items: center;
@@ -212,7 +211,6 @@
   color: var(--danger);
 }
 
-/* Actions */
 .actions {
   display: flex;
   gap: 12px;
@@ -294,7 +292,6 @@
   color: var(--text-muted);
 }
 
-/* Tabs */
 .tabs {
   margin-bottom: 64px;
 }
@@ -322,7 +319,6 @@
   border-bottom-color: var(--accent);
 }
 
-/* Specs */
 .specGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -356,7 +352,6 @@
   line-height: 1.4;
 }
 
-/* Reviews */
 .reviewsPanel {
   display: flex;
   flex-direction: column;
@@ -547,7 +542,6 @@
   }
 }
 
-/* Compare button on detail page */
 .compareBtn {
   display: flex;
   align-items: center;

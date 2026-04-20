@@ -159,7 +159,6 @@
   border-color: var(--danger);
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .layout {
     flex-direction: column;

@@ -3,7 +3,6 @@
   padding-bottom: 80px;
 }
 
-/* Page header */
 .pageHeader {
   display: flex;
   align-items: flex-start;
@@ -185,7 +184,6 @@
   width: calc((100% - 160px) / var(--col-count, 2));
 }
 
-/* Corner cell */
 .cornerCell {
   background: var(--surface);
   padding: 0;
@@ -208,7 +206,6 @@
   color: var(--text-muted);
 }
 
-/* Phone header cells */
 .phoneHeaderCell,
 .emptySlotCell {
   padding: 0;
@@ -366,7 +363,6 @@
   color: var(--accent);
 }
 
-/* Empty slot */
 .emptySlot {
   padding: 20px 16px;
   min-height: 280px;
@@ -398,7 +394,6 @@
   font-weight: 500;
 }
 
-/* Slot search */
 .slotSearchWrap {
   position: relative;
   width: 100%;
@@ -476,7 +471,6 @@
   color: var(--text-muted);
 }
 
-/* Category header rows */
 .catHeaderRow {
   background: var(--surface);
 }
@@ -493,7 +487,6 @@
   color: var(--accent);
 }
 
-/* Spec rows */
 .specRow {
   transition: background var(--transition);
 }
@@ -565,7 +558,6 @@
   border-right: none;
 }
 
-/* Inline cell styles */
 .priceCell {
   display: flex;
   align-items: baseline;
@@ -640,7 +632,6 @@
   font-size: 0.85rem;
 }
 
-/* Verdict / score row */
 .verdictRow {
   background: rgba(0, 216, 255, 0.03);
 }
@@ -688,7 +679,6 @@
   color: var(--accent);
 }
 
-/* Empty state */
 .emptyState {
   display: flex;
   flex-direction: column;
@@ -720,7 +710,6 @@
   margin-top: 8px;
 }
 
-/* Popular comparisons */
 .popular {
   margin-top: 16px;
 }
@@ -789,7 +778,6 @@
   color: var(--text-muted);
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .labelCol {
     width: 110px;
@@ -877,5 +865,5 @@
   }
   .headerCartBtn span {
     display: none;
-  } /* icon only on very small */
+  }
 }

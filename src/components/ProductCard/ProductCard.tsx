@@ -95,7 +95,6 @@ export default function ProductCard({
             />
           )}
 
-          {/* Badges */}
           <div className={styles.badges}>
             {product.isNew && (
               <span className={`badge badge-new ${styles.badge}`}>New</span>
@@ -107,7 +106,6 @@ export default function ProductCard({
             )}
           </div>
 
-          {/* Favorite button */}
           <button
             className={`${styles.favBtn} ${fav ? styles.favActive : ""}`}
             onClick={handleFav}
@@ -160,7 +158,6 @@ export default function ProductCard({
           )}
         </div>
 
-        {/* Color swatches */}
         <div className={styles.colors}>
           {product.colors.slice(0, 5).map((c) => (
             <span

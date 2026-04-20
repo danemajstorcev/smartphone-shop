@@ -78,7 +78,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
   return (
     <div className={`page-wrapper ${styles.page}`}>
       <div className="container">
-        {/* Breadcrumb */}
         <nav className={styles.breadcrumb}>
           <Link to="/">Home</Link>
           <span>/</span>
@@ -90,7 +89,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
         </nav>
 
         <div className={styles.layout}>
-          {/* Gallery */}
           <div className={styles.gallery}>
             <div className={styles.mainImg}>
               <img
@@ -121,7 +119,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
             </div>
           </div>
 
-          {/* Info */}
           <div className={styles.info}>
             <div className={styles.infoTop}>
               <Link
@@ -149,7 +146,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
             <h1 className={styles.name}>{product.name}</h1>
             <p className={styles.desc}>{product.shortDescription}</p>
 
-            {/* Rating */}
             <div className={styles.ratingRow}>
               <Stars rating={product.rating} />
               <span className={styles.ratingNum}>
@@ -160,7 +156,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
               </span>
             </div>
 
-            {/* Price */}
             <div className={styles.priceRow}>
               <span className={styles.price}>
                 ${product.price.toLocaleString()}
@@ -178,7 +173,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
               )}
             </div>
 
-            {/* Colors */}
             <div className={styles.colorPicker}>
               <p className={styles.pickerLabel}>
                 Color:{" "}
@@ -197,7 +191,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
               </div>
             </div>
 
-            {/* Availability */}
             <div className={styles.availability}>
               {product.inStock ? (
                 <span className={styles.inStock}>
@@ -218,7 +211,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
               )}
             </div>
 
-            {/* Actions */}
             <div className={styles.actions}>
               <button
                 className={`${styles.addBtn} ${inCart ? styles.addBtnCart : ""} ${adding ? styles.addBtnAdding : ""}`}
@@ -314,7 +306,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
               </Link>
             </div>
 
-            {/* Delivery badges */}
             <div className={styles.deliveryBadges}>
               {["🚚 Free Shipping", "🔒 Secure Pay", "↩️ 30-Day Return"].map(
                 (b) => (
@@ -327,7 +318,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
           </div>
         </div>
 
-        {/* Tabs: Specs / Reviews */}
         <div className={styles.tabs}>
           <div className={styles.tabBtns}>
             {(["specs", "reviews"] as const).map((t) => (
@@ -444,7 +434,6 @@ export default function ProductDetail({ onCartAdd }: Props) {
           )}
         </div>
 
-        {/* Related */}
         {related.length > 0 && (
           <section className={styles.related}>
             <div className="section-header">

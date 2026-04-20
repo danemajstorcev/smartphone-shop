@@ -35,13 +35,11 @@ export default function CartDrawer({ open, onClose }: Props) {
 
   return (
     <>
-      {/* Backdrop */}
       <div
         className={`${styles.backdrop} ${open ? styles.backdropVisible : ""}`}
         onClick={onClose}
       />
 
-      {/* Drawer */}
       <aside className={`${styles.drawer} ${open ? styles.drawerOpen : ""}`}>
         <div className={styles.head}>
           <div className={styles.headTitle}>

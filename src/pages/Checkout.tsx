@@ -179,7 +179,6 @@ export default function Checkout() {
 
         <h1 className={styles.pageTitle}>Checkout</h1>
 
-        {/* Progress */}
         <div className={styles.progress}>
           {STEPS.filter((s) => s !== "success").map((s, i) => (
             <div key={s} className={styles.progressStep}>
@@ -216,9 +215,7 @@ export default function Checkout() {
         </div>
 
         <div className={styles.layout}>
-          {/* Form area */}
           <div className={styles.formArea}>
-            {/* STEP: Shipping Info */}
             {step === "info" && (
               <div className={styles.card}>
                 <h2 className={styles.cardTitle}>
@@ -325,7 +322,6 @@ export default function Checkout() {
               </div>
             )}
 
-            {/* STEP: Payment */}
             {step === "payment" && (
               <div className={styles.card}>
                 <h2 className={styles.cardTitle}>
@@ -482,7 +478,6 @@ export default function Checkout() {
               </div>
             )}
 
-            {/* STEP: Review */}
             {step === "review" && (
               <div className={styles.card}>
                 <h2 className={styles.cardTitle}>
@@ -555,7 +550,6 @@ export default function Checkout() {
               </div>
             )}
 
-            {/* Navigation */}
             <div className={styles.navBtns}>
               {stepIdx > 0 && (
                 <button
@@ -596,7 +590,6 @@ export default function Checkout() {
             </div>
           </div>
 
-          {/* Order Summary Sidebar */}
           <aside className={styles.summary}>
             <h3 className={styles.summaryTitle}>Order Summary</h3>
             <div className={styles.summaryItems}>
@@ -645,7 +638,6 @@ export default function Checkout() {
   );
 }
 
-/* Helper: form field wrapper */
 function Field({
   label,
   error,

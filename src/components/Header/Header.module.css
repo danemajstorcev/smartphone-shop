@@ -121,7 +121,6 @@
   color: var(--text);
 }
 
-/* Search dropdown */
 .dropdown {
   position: absolute;
   top: calc(100% + 8px);
@@ -183,7 +182,6 @@
   flex-shrink: 0;
 }
 
-/* Action buttons */
 .actions {
   display: flex;
   align-items: center;
@@ -234,7 +232,6 @@
   border: 2px solid var(--bg);
 }
 
-/* Mobile menu button */
 .menuBtn {
   display: none;
   flex-direction: column;
@@ -318,8 +315,196 @@
 @media (max-width: 360px) {
   .logo span {
     display: none;
-  } /* show only icon on very tiny screens */
+  }
   .logoIcon {
     margin-right: 0;
   }
+}
+
+.signInBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(0, 216, 255, 0.25);
+  border-radius: var(--radius-sm);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.signInBtn:hover {
+  background: rgba(0, 216, 255, 0.25);
+  border-color: var(--accent);
+}
+@media (max-width: 899px) {
+  .signInBtn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 10px;
+    justify-content: center;
+    background: var(--accent-dim);
+    border-color: rgba(0, 216, 255, 0.25);
+  }
+  .signInBtn span {
+    display: none;
+  }
+}
+@media (min-width: 900px) {
+  .signInBtn span {
+    display: inline;
+  }
+}
+
+.userWrap {
+  position: relative;
+  flex-shrink: 0;
+}
+.userBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.userBtn:hover {
+  border-color: var(--accent);
+}
+.userInitials {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #000;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.userMenu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 230px;
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  overflow: hidden;
+  animation: fadeIn 0.15s ease;
+}
+.userMenuHeader {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 16px;
+  background: var(--surface);
+}
+.userMenuInitials {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #000;
+  flex-shrink: 0;
+}
+.userMenuName {
+  display: block;
+  font-size: 0.87rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.userMenuEmail {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.userMenuDivider {
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+.userMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  font-size: 0.87rem;
+  font-weight: 500;
+  color: var(--text-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background var(--transition),
+    color var(--transition);
+}
+.userMenuItem:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+.userMenuLogout {
+  color: var(--danger) !important;
+}
+.userMenuLogout:hover {
+  background: rgba(255, 64, 96, 0.08) !important;
+}
+
+.mobileDivider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+.mobileUser {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+.mobileUserInitials {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #000;
+  flex-shrink: 0;
+}
+.mobileLinkLogout {
+  color: var(--danger) !important;
+}
+.mobileLinkAccent {
+  color: var(--accent) !important;
+  font-weight: 600 !important;
 }
